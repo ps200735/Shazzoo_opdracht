@@ -1,5 +1,8 @@
 <?php
 
+use App\Livewire\ProductsPages\Productdetails;
+use App\Livewire\ProductsPages\Products;
+use App\Livewire\ShopCart\ShopCartItems;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
-
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -22,5 +23,13 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::get('/', Products::class)->name('products');
+Route::get('/product/{id}', Productdetails::class)->name('product.show');
+Route::middleware('auth')->group(function () {
+
+    Route::get('/winkelwagen', ShopCartItems::class)->name('cart');
+
+});
 
 require __DIR__.'/auth.php';

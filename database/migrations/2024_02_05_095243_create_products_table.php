@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('description');
             $table->string('image');
-            $table->decimal('price')->money_format();
-
+            $table->decimal('price', 8, 2);
             $table->timestamps();
         });
     }
